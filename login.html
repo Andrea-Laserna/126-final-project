@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> Registration Page </title>
+        <link rel="stylesheet" type="text/css" href="registration.css">
+    </head>
+    <body class="opening">
+        <header>
+            <h1 id="title"> Study Corner </h1>
+            <p id="name"> by: Webbers</p>
+        </header>
+        <div class="login">
+            <h4 id="back" onclick="goToBack()">Back</h4>  
+            <h1 id="open">Secure your account</h1>
+            <h3 id="about">Track and study better</h3>
+            <input type="text" id="email" placeholder="name@example.com"/>
+            <input type="text" id="password" placeholder="create password"/>
+            <button onclick="goToNext()">Continue</button>   
+        </div>
+        <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> 
+        <script>
+            function goToNext() {
+                const nameInput = document.getElementById("password").value.trim();
+                if(nameInput){
+                    window.location.href = "homepage.html";
+                } else{
+                    alert("Please enter your name first.");
+                }
+            }
+
+            function goToLogin(){
+                window.location.href = "login.html";
+            }
+
+            function goToBack(){
+                window.location.href = "registration.html"; 
+            }
+        </script>
+    </body>
+</html>

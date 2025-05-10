@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> Registration Page </title>
+        <link rel="stylesheet" type="text/css" href="registration.css">
+    </head>
+    <body class="opening">
+        <header>
+            <h1 id="title"> Study Corner </h1>
+            <p id="name"> by: Webbers</p>
+        </header>
+        <div class="registration">
+            <h1 id="welcome">Welcome to Study Corner</h1>
+            <h3 id="name">Let's start with your name</h3>
+            <input type="text" id="firstName" placeholder="First name"/> <!--change this to be more stylish-->
+            <button onclick="goToNext()">Continue</button>   <!--onclick for the next html page if pressed-->
+        </div>
+        <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> <!--dapat mapress para punta sa sign in page if may acc na-->
+        <script>
+            function goToNext() {
+                const nameInput = document.getElementById("firstName").value.trim();
+                if(nameInput){
+                    window.location.href = "login.html";
+                } else{
+                    alert("Please enter your name first.");
+                }
+            }
+
+            function goToLogin(){
+                window.location.href = "login.html";
+            }
+        </script>
+    </body>
+</html>
