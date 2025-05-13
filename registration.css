@@ -8,8 +8,8 @@
 
 body.opening {
     height: 100vh;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 100%);
     background: radial-gradient(circle at top left, #f6d365 0%, #fda085 30%, #a18cd1 60%, #fbc2eb 100%);
+    /* background: radial-gradient(circle at top left, #fda085 0%, #ce8cd1 30%, #a18cd1 60%, #8bafd0 100%); */
     display: flex;
     flex-direction: column;
     align-items: center;

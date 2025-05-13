@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'Sublima';
+    src: url(fonts/Sublima-ExtraBold.otf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+    height: 100%;
+  }
+}
+
+body {
+    color: white;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background: radial-gradient(circle at top left, #fda085 0%, #ce8cd1 30%, #a18cd1 60%, #8bafd0 100%);
+    font-family: "Sublima", sans-serif;
+    /* 4. Add accessible line-height */
+    line-height: 1.5;
+    /* 5. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+header .logo {
+    display: inline-block;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.25rem;
+}
+
+header .logo .author {
+    text-align: right;
+}
+
+.timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+}
+
+.timer-container p {
+    font-family: "Lora", serif;
+    font-size: 1.5rem;
+}
+
+.timer-container .timer {
+    font-size: 10rem;
+}
+
+.timer-container button {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 20px;
+    border-style: none;
+    background-color: #8c52ff;
+    color: white;
+}
+
+.timer-container button:hover {
+    background-color: #fda085;
+    cursor: pointer;
+}
+
+.timer-container .current-task {
+    font-family: "Lora", serif;
+    font-size: 2rem;
+    padding: 40px;
+}
