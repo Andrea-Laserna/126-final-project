@@ -1,76 +1,83 @@
-// Referencing DOM Elements
 document.getElementById("start-timer").addEventListener("click", popupTask);
 
-// pop up the task list after clicking start
 function popupTask() {
-    // check if popup exists already
     if (document.getElementById('task-popup')) return;
 
-    // create popup overlay
     const popup = document.createElement('div');
     popup.id = 'task-popup';
     popup.innerHTML = `
-        <div id="task-popup-content">
-            <p>Which task would you like to work on now</p>
-            <div class="task-list"></div>
-            <div class="task-btns">
-                <button id="add-task">Add Task</button>
-                <button id="start">Start</button>
+        <div class="task-popup-container">
+            <div class="task-popup-content">
+                <p>Which task would you like to work on now?</p>
+                <ul class="task-list">
+                    <li class="task" id="t1">Save Pakistan</li>
+                    <li class="task" id="t2">Destroy India</li>
+                    <li class="task" id="t3">Grape</li>
+                    <li class="task" id="t4">Grape</li>
+                    <li class="task" id="t5">Grape</li>
+                    <li class="task" id="t6">Grape</li>
+                    <li class="task" id="t7">Grape</li>
+                </ul>
+                <div class="task-btns">
+                    <button id="add-task">Add Task</button>
+                    <button id="start">Start</button>
+                </div>
             </div>
-            
         </div>
     `;
-    
-    // popup styles
-    Object.assign(popup.style, {
-        position: 'fixed',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        top: '5rem',
-        right: '1.5rem',
-        width: '25vw',
-        height: '80vh',
-        zIndex: '1000',
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        borderRadius: '50px',
-    });
 
-    // add to body
     document.body.appendChild(popup);
 
-    // inner content styles
-    const popupContent = popup.querySelector('#task-popup-content');
-    const taskBtns = popup.querySelectorAll('.task-btns button');
-    const addTaskBtn = popup.querySelector('#add-task');
-    const startBtn = popup.querySelector('#start');
+    const currentTaskDisplay = document.querySelector('.current-task');
+    const listContent = popup.querySelectorAll('.task');
 
-    Object.assign(popupContent.style, {
-        padding: '50px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-    });
-
-    taskBtns.forEach(btn => {
-        Object.assign(btn.style, {
-            backgroundColor: '#8c52ff',
-            borderRadius: '20px',
-            color: 'white',
-            width: '8rem',
-            height: '3rem',
-            border: 'none',
+    listContent.forEach(task => {
+        task.addEventListener('click', () => {
+            currentTaskDisplay.textContent = task.textContent;
         });
     });
 
-    // // remove popup
-    // popup.addEventListener('click', (e) => {
-    //     const popup = document.getElementById('task-popup');
-    //     const popupContent = document.getElementById('task-popup-content');
+    popup.querySelector("#start").addEventListener("click", startTimer);
+    updateDisplay();
 
-    //     if (popup && !popupContent.contains(e.target)) {
-    //         popup.remove();
-    //     }
-    // });
+    // Remove popup on click outside
+    popup.addEventListener('click', (e) => {
+        if (popup && e.target === popup) {
+            popup.remove();
+        }
+    });
+}
+
+// timer Countdown
+const timerDisplay = document.querySelector('.timer');
+let timeLeft = 25 * 60; // 25 mins in secs
+let timerInterval = null;
+
+// time format
+function formatTime(seconds) {
+    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    return `${mins}:${secs}`;
+}
+
+// update timer display
+function updateDisplay() {
+    timerDisplay.textContent = formatTime(timeLeft);
+}
+
+// start countdown
+function startTimer() {
+    // prevent multiple timers
+    if (timerInterval) return;
+
+    timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay();
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            alert("Time's up!");
+        }
+    }, 1000);
 }

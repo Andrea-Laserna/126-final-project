@@ -28,7 +28,7 @@ body {
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
-    background: radial-gradient(circle at top left, #fda085 0%, #ce8cd1 30%, #a18cd1 60%, #8bafd0 100%);
+    background: radial-gradient(circle at top left, #fda085 0%, #d18cb8 30%, #a18cd1 60%, #8bafd0 100%);
     font-family: "Sublima", sans-serif;
     /* 4. Add accessible line-height */
     line-height: 1.5;
@@ -115,4 +115,99 @@ header .logo .author {
     font-family: "Lora", serif;
     font-size: 2rem;
     padding: 40px;
+}
+
+/* popup task overlay */
+#task-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 1000;
+}
+
+/* Popup container on the right */
+.task-popup-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 25vw;
+    height: 80vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+}
+
+/* Inner content */
+.task-popup-content {
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* buttons */
+.task-btns button {
+    background-color: #8c52ff;
+    border-radius: 20px;
+    color: white;
+    width: 8rem;
+    height: 3rem;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.task-btns button:hover {
+    background-color: #fda085;
+    cursor: pointer;
+}
+
+/* task list */
+.task-list {
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    list-style: none;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: 50vh;
+    width: 20vw;
+    overflow-y: auto;
+    margin: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff #8bafd0 ;
+}
+
+/* scrollbar for WebKit */
+.task-list::-webkit-scrollbar {
+    width: 8px;
+}
+.task-list::-webkit-scrollbar-thumb {
+    background-color: #8c52ff;
+    border-radius: 10px;
+}
+.task-list::-webkit-scrollbar-track {
+    background-color: #8c52ff;
+}
+
+/* individual task items */
+.task {
+    background-color: rgba(146, 38, 90, 0.8);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.task:hover {
+    transform: scale(1.2);
+    background-color: #fda085;
 }
