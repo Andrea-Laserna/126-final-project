@@ -153,7 +153,7 @@ header .logo .author {
 }
 
 /* buttons */
-.task-btns button {
+.task-btns button, .timer-btns-container button {
     background-color: #8c52ff;
     border-radius: 20px;
     color: white;

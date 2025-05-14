@@ -50,8 +50,10 @@ function popupTask() {
 
 // timer Countdown
 const timerDisplay = document.querySelector('.timer');
+const startBtn = document.querySelector('.start-button');
 let timeLeft = 25 * 60; // 25 mins in secs
 let timerInterval = null;
+let isPaused = false;
 
 // time format
 function formatTime(seconds) {
@@ -70,6 +72,55 @@ function startTimer() {
     // prevent multiple timers
     if (timerInterval) return;
 
+    // hide start button
+    startBtn.style.display = 'none';
+
+    // create pause and stop buttons
+    const timerBtns = document.createElement('div');
+    timerBtns.id = 'timer-btns';
+    timerBtns.innerHTML = `
+        <div class=timer-btns-container>
+            <button id='pause'>Pause</button>
+            <button id='stop'>Stop</button>
+        </div>
+    `
+    startBtn.parentNode.replaceChild(timerBtns, startBtn);
+
+
+    // pause and stop button logic
+    const pauseBtn = timerBtns.querySelector('#pause');
+    // Start the countdown
+    startCountdown();
+
+    // Pause/Resume Logic
+    pauseBtn.addEventListener('click', () => {
+        if (!isPaused) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = true;
+            pauseBtn.textContent = 'Resume';
+        } else {
+            startCountdown();
+            isPaused = false;
+            pauseBtn.textContent = 'Pause';
+        }
+    });
+
+    // Stop Logic
+    stopBtn.addEventListener('click', () => {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isPaused = false;
+        timeLeft = 25 * 60; // reset to original
+        updateDisplay();
+
+        // Replace pause/stop with original start button
+        timerBtns.parentNode.replaceChild(startBtn, timerBtns);
+        startBtn.style.display = 'inline-block';
+    });
+}
+
+function startCountdown() {
     timerInterval = setInterval(() => {
         if (timeLeft > 0) {
             timeLeft--;
