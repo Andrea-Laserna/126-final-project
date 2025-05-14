@@ -89,16 +89,20 @@ function startTimer() {
 
     // pause and stop button logic
     const pauseBtn = timerBtns.querySelector('#pause');
+    const stopBtn = timerBtns.querySelector('#stop');
+    
     // Start the countdown
     startCountdown();
 
     // Pause/Resume Logic
     pauseBtn.addEventListener('click', () => {
+        // click pauses timer
         if (!isPaused) {
             clearInterval(timerInterval);
             timerInterval = null;
             isPaused = true;
             pauseBtn.textContent = 'Resume';
+        // click resumes timer
         } else {
             startCountdown();
             isPaused = false;
@@ -114,7 +118,7 @@ function startTimer() {
         timeLeft = 25 * 60; // reset to original
         updateDisplay();
 
-        // Replace pause/stop with original start button
+        // replace pause/stop with original start button
         timerBtns.parentNode.replaceChild(startBtn, timerBtns);
         startBtn.style.display = 'inline-block';
     });
