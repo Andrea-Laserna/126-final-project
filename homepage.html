@@ -7,8 +7,13 @@
 </head>
 <body>
   <header>
-    <h1 id="title">Study Corner</h1>
-    <h2 id="authors">by: Webbers</h2>
+    <div class="header-left">
+      <h1 id="title">Study Corner</h1>
+      <h2 id="authors">by: Webbers</h2>
+    </div>
+    <div class="header-right">
+      <h1 id="mssg">Hello, [username]!</h1>
+    </div>
   </header>
 
   <div class="welcome-mssg">
@@ -24,21 +29,25 @@
         <div id="nav-statistics">Statistics</div>
       </div>
       <div id="gif-section">Cute GIF</div>
+  <div class="container">
+    <p id="quote">"Lorem ipsum dolor sit amet consectetur adipisicing elit."</p>
+    <div class="card-section">
+      <a class="navigation" href="timer.html"><div id="nav-timer">Timer</div></a>
+      <a class="navigation" href="tasks_management.html"><div id="nav-tasks">Tasks</div></a>
+      <a class="navigation" href="statistics.html"><div id="nav-stats">Statistics</div></a>
     </div>
     
-    <h2 id="summary-title">Task Summary</h2>
-    <div class="task-summary">
-        <h3 class="task-due-soon">🚨 Don't be lazy and JUST DO IT!!</h3>
+    <div class="tasks-container">
+      <h2 class="summary-title">Task Summary</h2>
+      <div class="task-summary">
+        <h3>🎉 Don't be lazy and JUST DO IT!!</h3>
         <hr>
-        <div class="task-card due-soon">[Tasks Due Soon]</div>
-        <div class="task-card due-soon">[Tasks Due Soon]</div>
-        <div class="task-card due-soon">[Tasks Due Soon]</div>
-
-        <h3 class="task-upcoming">📅 Guess what? More tasks!</h3>
-        <hr>
-        <div class="task-card upcoming">[Upcoming Tasks]</div>
-        <div class="task-card upcoming">[Upcoming Tasks]</div>
-        <div class="task-card upcoming">[Upcoming Tasks]</div>
+        <div class="task-card due-soon">[Tasks Due Soon/OnGoing]</div>
+        <div class="task-card due-soon">[Tasks Due Soon/OnGoing]</div>
+        <div class="task-card due-soon">[Tasks Due Soon/OnGoing]</div>
+      </div>
+      <div class="insert-timer-float">
+        <h2>Insert timer here</h2>
       </div>
     </div>
   </div>
