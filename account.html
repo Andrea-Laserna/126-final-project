@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> Account Registration </title>
+        <title> Account Login </title>
         <link rel="stylesheet" type="text/css" href="registration.css">
     </head>
     <body>
@@ -14,13 +14,11 @@
         <div class="opening">
             <div class="login">
                 <h4 id="back" onclick="goToBack()">Back</h4>  
-                <h1 id="open">Secure your account</h1>
-                <h3 id="about">Track and study better</h3>
+                <h1 id="open">Login your Account</h1>
                 <input type="text" id="email" placeholder="name@example.com"/>
                 <input type="text" id="password" placeholder="create password"/>
                 <button onclick="goToNext()">Continue</button>   
             </div>
-            <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> 
         </div>
         <script>
             function goToNext() {
@@ -28,12 +26,8 @@
                 if(nameInput){
                     window.location.href = "homepage.html";
                 } else{
-                    alert("Please enter your name first.");
+                    alert("Please enter your email first.");
                 }
-            }
-
-            function goToLogin(){
-                window.location.href = "account.html";
             }
 
             function goToBack(){

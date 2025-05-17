@@ -6,22 +6,33 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body.opening {
-    height: 100vh;
-    background: radial-gradient(circle at top left, #f6d365 0%, #fda085 30%, #a18cd1 60%, #fbc2eb 100%);
+.opening {
     /* background: radial-gradient(circle at top left, #fda085 0%, #ce8cd1 30%, #a18cd1 60%, #8bafd0 100%); */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 20%;
+}
+
+body{
+    background: radial-gradient(circle at top left, #f6d365 0%, #fda085 30%, #a18cd1 60%, #fbc2eb 100%);
 }
 
 /* Header */
 header {
-    position: absolute;
-    top: 30px;
-    left: 30px;
+    display: inline-block;
+    padding: 20px;
     color: white;
+}
+
+header h1{
+    font-size: 2.25rem;
+}
+
+header p{
+    text-align: right;
 }
 
 #title {

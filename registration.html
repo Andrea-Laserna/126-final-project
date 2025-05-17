@@ -6,11 +6,12 @@
         <title> Registration Page </title>
         <link rel="stylesheet" type="text/css" href="registration.css">
     </head>
-    <body class="opening">
+    <body> 
         <header>
             <h1 id="title"> Study Corner </h1>
             <p id="name"> by: Webbers</p>
         </header>
+    <div class="opening">
         <div class="registration">
             <h1 id="welcome">Welcome to Study Corner</h1>
             <h3 id="name">Let's start with your name</h3>
@@ -18,6 +19,7 @@
             <button onclick="goToNext()">Continue</button>   <!--onclick for the next html page if pressed-->
         </div>
         <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> <!--dapat mapress para punta sa sign in page if may acc na-->
+    </div>
         <script>
             function goToNext() {
                 const nameInput = document.getElementById("firstName").value.trim();
@@ -29,7 +31,7 @@
             }
 
             function goToLogin(){
-                window.location.href = "login.html";
+                window.location.href = "account.html";
             }
         </script>
     </body>
