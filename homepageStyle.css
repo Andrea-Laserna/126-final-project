@@ -106,9 +106,10 @@ header {
 
 p#quote {
   position: fixed;
-  left: 22%;
-  font-size: 14px;
+  left: 20%;
+  font-size: 15px;
   margin-top: 4px;
+  font-style: italic;
 }
  
 .container {
