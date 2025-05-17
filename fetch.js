@@ -6,12 +6,8 @@ async function fetchData(){
             throw new Error("could not fetch resource"); 
         }
 
-        //console.log(response)
-
         const data = await response.json();
-        console.log(data.quote)
         const quote = data.quote;
-        //const author = data[0].a;
 
         const container = document.getElementById("quote");
         container.textContent = `"${quote} - Kanye West"`;
