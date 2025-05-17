@@ -6,6 +6,7 @@ function popupTask() {
     const popup = document.createElement('div');
     popup.id = 'task-popup';
     popup.innerHTML = `
+        <img src="images/close-square-svgrepo-com.svg" class="exit-task-popup">
         <div class="task-popup-container">
             <div class="task-popup-content">
                 <p>Which task would you like to work on now?</p>
@@ -40,15 +41,20 @@ function popupTask() {
     popup.querySelector("#start").addEventListener("click", startTimer);
     updateDisplay();
 
-    // Remove popup on click outside
-    popup.addEventListener('click', (e) => {
-        if (popup && e.target === popup) {
-            popup.remove();
-        }
+    // // Remove popup on click outside
+    // popup.addEventListener('click', (e) => {
+    //     if (popup && e.target === popup) {
+    //         popup.remove();
+    //     }
+    // });
+
+    document.querySelector('.exit-task-popup').addEventListener('click', () => {
+        popup.remove();
     });
+
 }
 
-// timer Countdown
+// timer countdown
 const timerDisplay = document.querySelector('.timer');
 const startBtn = document.querySelector('.start-button');
 let timeLeft = 25 * 60; // 25 mins in secs
@@ -90,39 +96,64 @@ function startTimer() {
     // pause and stop button logic
     const pauseBtn = timerBtns.querySelector('#pause');
     const stopBtn = timerBtns.querySelector('#stop');
-    
-    // Start the countdown
-    startCountdown();
 
-    // Pause/Resume Logic
-    pauseBtn.addEventListener('click', () => {
-        // click pauses timer
+    function pauseTimer() {
+        // clicking pauses timer
         if (!isPaused) {
             clearInterval(timerInterval);
             timerInterval = null;
             isPaused = true;
             pauseBtn.textContent = 'Resume';
-        // click resumes timer
+        // clicking resumes timer
         } else {
             startCountdown();
             isPaused = false;
             pauseBtn.textContent = 'Pause';
         }
-    });
+    }
+    
+    // start the countdown
+    startCountdown();
 
+    // pause/resume Logic
+    pauseBtn.addEventListener('click', pauseTimer);
+   
     // Stop Logic
     stopBtn.addEventListener('click', () => {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        isPaused = false;
-        timeLeft = 25 * 60; // reset to original
-        updateDisplay();
+        // pause first
+
+        // record reset popup
+        const stopPopup = document.createElement('div');
+        stopPopup.id = 'stop-popup';
+        stopPopup.innerHTML = `
+            <div class="stop-popup-content">
+                <h1>Ayaw mo na?<br>Kala mo maraming nagawa eh.</h1>
+                <div class="stop-buttons">
+                    <button id="record">Record</button>
+                    <button id="reset">Reset</button>
+                </div>
+            </div>
+        `
+        document.body.appendChild(stopPopup);
+
+        // record time logic
+
+
+        // reset logic
+        stopPopup.querySelector('#reset').addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            timeLeft = 25 * 60; // reset to original
+            updateDisplay();
+        });
 
         // replace pause/stop with original start button
         timerBtns.parentNode.replaceChild(startBtn, timerBtns);
         startBtn.style.display = 'inline-block';
     });
 }
+
 
 function startCountdown() {
     timerInterval = setInterval(() => {
@@ -135,4 +166,32 @@ function startCountdown() {
             alert("Time's up!");
         }
     }, 1000);
+}
+
+document.getElementById('music').addEventListener('click', spotifyPopup);
+
+function spotifyPopup() {
+    if (document.getElementById('spotify')) return;
+    
+    const spotifyBox = document.createElement('div');
+    spotifyBox.id = 'spotify';
+    spotifyBox.innerHTML = `
+        <img src="images/close-square-svgrepo-com.svg" class="exit-spotify-popup">
+        <iframe
+            src="https://open.spotify.com/embed/playlist/1iCIhy3fqqSBrTUcIxI804?utm_source=generator"
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            allowfullscreen 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"
+            style="border-radius: 12px; margin: 0;">
+        </iframe>
+    `
+    document.body.appendChild(spotifyBox);
+
+    // exit spotify popup
+    document.querySelector('.exit-spotify-popup').addEventListener('click', () => {
+        spotifyBox.remove();
+    });
 }
