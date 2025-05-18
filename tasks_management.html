@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Corner: Tasks</title>
+  <link rel="stylesheet" href="tasksStyle.css">
+</head>
+<div id="taskForm" class="form">
+  <div class="pop-up">
+    <span id="closePopUp" class="close">×</span>
+    <h2>Add Task</h2>
+    <label for="taskName">Task Name:</label>
+    <input type="text" id="taskName" placeholder="Task Name" required />
+    <span id="nameError" class="error"></span><br>
+    <label for="dueDate">Due Date:</label>
+    <input type="date" id="dueDate" required />
+    <button id="saveTask">Add Task</button>
+  </div>
+</div>
+
+<body>
+  <header>
+    <div class="header-left">
+      <h1 id="title">Study Corner</h1>
+      <h2 id="authors">by: Webbers</h2>
+    </div>
+    <div class="navBar">
+		  <a class="navigation" id="homepage" href="homepage.html">Home</a>
+		  <a class="navigation" href="timer.html" id="timer">Timer</a>
+	    <a class="navigation" href="tasks_management.html" id="tasks">Tasks</a>
+      <a class="navigation" href="satistics.html" id="stats">Statistics</a>
+	  </div>
+  </header>
+
+  <div class="categories">
+    <div class="status pending">
+      <div class="title">Pending</div>
+      <div class="list-container">
+        <div class="task-card add-task">+ Add Task</div>
+      </div>
+    </div>
+
+    <div class="status ongoing">
+      <div class="title">On Going</div>
+      <div class="list-container">
+        <div class="task-card add-task">+ Add Task</div>
+      </div>
+    </div>
+
+    <div class="status done">
+      <div class="title">Done</div>
+      <div class="list-container">
+        <div class="task-card add-task">+ Add Task</div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="event-container"></div>-->
+  <script src="taskScript.js"></script>
+
+</body>
+</html>
