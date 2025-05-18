@@ -220,7 +220,7 @@ header .logo .author {
 }
 
 /* buttons */
-.task-btns button, .timer-btns-container button, #stop-popup .stop-popup-content .stop-buttons button, #break-btns .break-buttons button {
+.task-btns button, .timer-btns-container button, #stop-popup .stop-popup-content .stop-buttons button, #break-btns .break-buttons button, #break-start-btns button {
     background-color: #8c52ff;
     border-radius: 20px;
     color: white;
@@ -231,7 +231,7 @@ header .logo .author {
     cursor: pointer;
 }
 
-.task-btns button:hover, #stop-popup .stop-popup-content .stop-buttons button:hover, #break-btns .break-buttons button:hover{
+.task-btns button:hover, #stop-popup .stop-popup-content .stop-buttons button:hover, #break-btns .break-buttons button:hover, #break-start-btns button:hover {
     background-color: #fda085;
     cursor: pointer;
 }

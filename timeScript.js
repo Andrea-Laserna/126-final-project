@@ -174,6 +174,7 @@ function startCountdown(timerBtns) {
                     <button id="break">Break</button>
                 </div>
             `;
+
             timerBtns.parentNode.replaceChild(breakBtns, timerBtns);
 
             breakBtns.querySelector('#restart').addEventListener('click', () => {
@@ -220,7 +221,39 @@ function breakCountdown(breakBtns) {
 }
 
 function startBreakTimer() {
+    const breakStartBtn = document.getElementById('break-start');
 
+    if(!breakStartBtn) return;
+
+    breakStartBtn.style.display = 'none';
+
+    timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay(timeLeft);
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            updateDisplay(0);
+
+            // replace break start button with restart
+            const restartBreak = document.createElement('button');
+            restartBreak.id = 'restart-break';
+            restartBreak.textContent = 'Restart Break';
+
+            breakStartBtn.remove();
+
+            const btnContainer = document.getElementById('break-start-btns');
+            btnContainer.appendChild(restartBreak);
+
+            restartBreak.addEventListener('click', () => {
+                resetBreakTimer();
+                restartBreak.remove();
+                btnContainer.appendChild(breakStartBtn);
+                breakStartBtn.style.display = 'inline-block';
+            });
+        }
+    }, 1000);
 }
 
 document.getElementById('music').addEventListener('click', spotifyPopup);
