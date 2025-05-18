@@ -166,6 +166,11 @@ function startCountdown(timerBtns) {
             timerInterval = null;
             alert("Time's up!");
 
+            // remove stopPopup if exists
+            if (document.getElementById('stop-popup')) {
+                document.getElementById('stop-popup').remove();
+            }
+
             const breakBtns = document.createElement('div');
             breakBtns.id = 'break-btns';
             breakBtns.innerHTML = `
