@@ -1,3 +1,12 @@
+// timer countdown
+const timerDisplay = document.querySelector('.timer');
+const startBtn = document.querySelector('.start-button');
+let pomodoroTimeLeft = 0.5 * 60; // 1 minute
+let breakTimeLeft = 0.6 * 60; // 1.5 minutes
+let timerInterval = null;
+let isPaused = false;
+let timeLeft = pomodoroTimeLeft; // track time globally
+
 document.getElementById("start-timer").addEventListener("click", popupTask);
 
 function popupTask() {
@@ -39,27 +48,12 @@ function popupTask() {
     });
 
     popup.querySelector("#start").addEventListener("click", startTimer);
-    updateDisplay();
-
-    // // Remove popup on click outside
-    // popup.addEventListener('click', (e) => {
-    //     if (popup && e.target === popup) {
-    //         popup.remove();
-    //     }
-    // });
+    updateDisplay(pomodoroTimeLeft);
 
     document.querySelector('.exit-task-popup').addEventListener('click', () => {
         popup.remove();
     });
-
 }
-
-// timer countdown
-const timerDisplay = document.querySelector('.timer');
-const startBtn = document.querySelector('.start-button');
-let timeLeft = 25 * 60; // 25 mins in secs
-let timerInterval = null;
-let isPaused = false;
 
 // time format
 function formatTime(seconds) {
@@ -69,63 +63,58 @@ function formatTime(seconds) {
 }
 
 // update timer display
-function updateDisplay() {
-    timerDisplay.textContent = formatTime(timeLeft);
+function updateDisplay(time) {
+    timerDisplay.textContent = formatTime(time);
 }
 
 // start countdown
 function startTimer() {
-    // prevent multiple timers
     if (timerInterval) return;
 
     // hide start button
     startBtn.style.display = 'none';
 
+    // set timeLeft
+    timeLeft = pomodoroTimeLeft;
+
     // create pause and stop buttons
     const timerBtns = document.createElement('div');
     timerBtns.id = 'timer-btns';
     timerBtns.innerHTML = `
-        <div class=timer-btns-container>
+        <div class="timer-btns-container">
             <button id='pause'>Pause</button>
             <button id='stop'>Stop</button>
         </div>
-    `
-    startBtn.parentNode.replaceChild(timerBtns, startBtn);
+    `;
+    // startBtn.parentNode.replaceChild(timerBtns, startBtn);
+    startBtn.style.display = 'none';
+    startBtn.insertAdjacentElement('afterend', timerBtns);
 
 
-    // pause and stop button logic
     const pauseBtn = timerBtns.querySelector('#pause');
     const stopBtn = timerBtns.querySelector('#stop');
 
     function pauseTimer() {
-        // clicking pauses timer
         if (!isPaused) {
             clearInterval(timerInterval);
             timerInterval = null;
             isPaused = true;
             pauseBtn.textContent = 'Resume';
-        // clicking resumes timer
         } else {
-            startCountdown();
+            startCountdown(timerBtns); // resume with current timeLeft
             isPaused = false;
             pauseBtn.textContent = 'Pause';
         }
     }
-    
-    // start the countdown
-    startCountdown();
 
-    // pause/resume Logic
     pauseBtn.addEventListener('click', pauseTimer);
-   
-    // Stop Logic
-    stopBtn.addEventListener('click', () => {
-        // pause first
 
-        // record reset popup
+    stopBtn.addEventListener('click', () => {
+        if (document.getElementById('stop-popup')) return;
         const stopPopup = document.createElement('div');
         stopPopup.id = 'stop-popup';
         stopPopup.innerHTML = `
+            <img src="images/close-square-svgrepo-com.svg" class="exit-stop-popup"></img>
             <div class="stop-popup-content">
                 <h1>Ayaw mo na?<br>Kala mo maraming nagawa eh.</h1>
                 <div class="stop-buttons">
@@ -133,46 +122,112 @@ function startTimer() {
                     <button id="reset">Reset</button>
                 </div>
             </div>
-        `
+        `;
         document.body.appendChild(stopPopup);
 
-        // record time logic
-
-
-        // reset logic
         stopPopup.querySelector('#reset').addEventListener('click', () => {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            isPaused = false;
-            timeLeft = 25 * 60; // reset to original
-            updateDisplay();
+            resetPomodoroTimer();
+            // timerBtns.parentNode.replaceChild(startBtn, timerBtns);
+            timerBtns.remove();
+            startBtn.style.display = 'inline-block';
+            stopPopup.remove();
         });
-
-        // replace pause/stop with original start button
-        timerBtns.parentNode.replaceChild(startBtn, timerBtns);
-        startBtn.style.display = 'inline-block';
     });
+
+    // start timer initially
+    startCountdown(timerBtns);
 }
 
+function resetPomodoroTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isPaused = false;
+    pomodoroTimeLeft = 0.5 * 60;
+    timeLeft = pomodoroTimeLeft; // reset timeLeft
+    updateDisplay(timeLeft);
+}
 
-function startCountdown() {
+function resetBreakTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isPaused = false;
+    breakTimeLeft = 0.6 * 60;
+    timeLeft = breakTimeLeft;
+    updateDisplay(timeLeft);
+}
+
+function startCountdown(timerBtns) {
     timerInterval = setInterval(() => {
         if (timeLeft > 0) {
             timeLeft--;
-            updateDisplay();
+            updateDisplay(timeLeft);
         } else {
             clearInterval(timerInterval);
             timerInterval = null;
             alert("Time's up!");
+
+            const breakBtns = document.createElement('div');
+            breakBtns.id = 'break-btns';
+            breakBtns.innerHTML = `
+                <div class="break-buttons">
+                    <button id="restart">Restart</button>
+                    <button id="break">Break</button>
+                </div>
+            `;
+            timerBtns.parentNode.replaceChild(breakBtns, timerBtns);
+
+            breakBtns.querySelector('#restart').addEventListener('click', () => {
+                resetPomodoroTimer();
+                // breakBtns.parentNode.replaceChild(startBtn, breakBtns);
+                breakBtns.remove();
+                startBtn.style.display = 'inline-block';
+            });
+
+            breakBtns.querySelector('#break').addEventListener('click', () => {
+                breakCountdown(breakBtns);
+            });
         }
     }, 1000);
+}
+
+function breakCountdown(breakBtns) {
+    const breakStartBtns = document.createElement('div');
+    breakStartBtns.id = 'break-start-btns';
+    breakStartBtns.innerHTML = `
+        <button id="return">Return</button>
+        <button id="break-start">Start</button> 
+    `;
+
+    document.body.appendChild(breakStartBtns);
+
+    resetBreakTimer();
+    breakBtns.parentNode.replaceChild(breakStartBtns, breakBtns);
+
+    breakStartBtns.querySelector('#return').addEventListener('click', () => {
+        // Clear break timer
+        clearInterval(timerInterval);
+        timerInterval = null;
+
+        breakStartBtns.remove();
+        resetPomodoroTimer();
+
+        // Show start button again
+        breakStartBtns.remove();
+        startBtn.style.display = 'inline-block';
+    });
+
+    breakStartBtns.querySelector('#break-start').addEventListener('click', startBreakTimer);
+}
+
+function startBreakTimer() {
+
 }
 
 document.getElementById('music').addEventListener('click', spotifyPopup);
 
 function spotifyPopup() {
     if (document.getElementById('spotify')) return;
-    
+
     const spotifyBox = document.createElement('div');
     spotifyBox.id = 'spotify';
     spotifyBox.innerHTML = `
@@ -187,10 +242,9 @@ function spotifyPopup() {
             loading="lazy"
             style="border-radius: 12px; margin: 0;">
         </iframe>
-    `
+    `;
     document.body.appendChild(spotifyBox);
 
-    // exit spotify popup
     document.querySelector('.exit-spotify-popup').addEventListener('click', () => {
         spotifyBox.remove();
     });
