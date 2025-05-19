@@ -11,25 +11,34 @@
                 <h1 id="title"> Study Corner </h1>
                 <p id="name"> by: Webbers</p>
         </header>
+
         <div class="opening">
             <div class="login">
                 <h4 id="back" onclick="goToBack()">Back</h4>  
                 <h1 id="open">Secure your account</h1>
                 <h3 id="about">Track and study better</h3>
-                <input type="text" id="email" placeholder="name@example.com"/>
-                <input type="text" id="password" placeholder="create password"/>
-                <button onclick="goToNext()">Continue</button>   
+                <div class="form-container">
+                    <form action="newUser.php" method="POST" onsubmit=" return addNameToForm()">
+                        <input type="hidden" name="name" id="nameField"/>
+                        <input type="email"  name= "email" id="email" placeholder="name@example.com"/>
+                        <input type="password" name= "pwd" id="password" placeholder="create password"/>
+                        <button type="submit">Continue</button> 
+                    </form>
+                </div>  
             </div>
             <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> 
         </div>
         <script>
-            function goToNext() {
-                const nameInput = document.getElementById("password").value.trim();
-                if(nameInput){
-                    window.location.href = "homepage.html";
-                } else{
-                    alert("Please enter your name first.");
+
+            function addNameToForm(){
+                const storedName = localStorage.getItem("reg_name");
+                if(!storedName){
+                    alert("Name not found");
+                    return false;
                 }
+                document.getElementById("nameField").value = storedName; 
+                localStorage.clear();
+                return true; 
             }
 
             function goToLogin(){
@@ -39,6 +48,7 @@
             function goToBack(){
                 window.location.href = "registration.html"; 
             }
+
         </script>
     </body>
 </html>

@@ -11,6 +11,7 @@
             <h1 id="title"> Study Corner </h1>
             <p id="name"> by: Webbers</p>
         </header>
+
     <div class="opening">
         <div class="registration">
             <h1 id="welcome">Welcome to Study Corner</h1>
@@ -20,10 +21,12 @@
         </div>
         <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> <!--dapat mapress para punta sa sign in page if may acc na-->
     </div>
+
         <script>
             function goToNext() {
                 const nameInput = document.getElementById("firstName").value.trim();
                 if(nameInput){
+                    localStorage.setItem("reg_name", nameInput); 
                     window.location.href = "login.html";
                 } else{
                     alert("Please enter your name first.");

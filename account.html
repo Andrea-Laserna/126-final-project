@@ -15,21 +15,16 @@
             <div class="login">
                 <h4 id="back" onclick="goToBack()">Back</h4>  
                 <h1 id="open">Login your Account</h1>
-                <input type="text" id="email" placeholder="name@example.com"/>
-                <input type="text" id="password" placeholder="create password"/>
-                <button onclick="goToNext()">Continue</button>   
+
+                <form action="user.php" method="POST">
+                    <input type="email" name = "email" id="email" placeholder="name@example.com"/>
+                    <input type="password" name = "pwd" id="password" placeholder="enter password"/>
+                    <button type="submit">Continue</button>   
+                </form>
             </div>
         </div>
-        <script>
-            function goToNext() {
-                const nameInput = document.getElementById("password").value.trim();
-                if(nameInput){
-                    window.location.href = "homepage.html";
-                } else{
-                    alert("Please enter your email first.");
-                }
-            }
 
+        <script>
             function goToBack(){
                 window.location.href = "registration.html"; 
             }
