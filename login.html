@@ -17,14 +17,12 @@
                 <h4 id="back" onclick="goToBack()">Back</h4>  
                 <h1 id="open">Secure your account</h1>
                 <h3 id="about">Track and study better</h3>
-                <div class="form-container">
-                    <form action="newUser.php" method="POST" onsubmit=" return addNameToForm()">
-                        <input type="hidden" name="name" id="nameField"/>
-                        <input type="email"  name= "email" id="email" placeholder="name@example.com"/>
-                        <input type="password" name= "pwd" id="password" placeholder="create password"/>
-                        <button type="submit">Continue</button> 
-                    </form>
-                </div>  
+                <form action="newUser.php" method="POST" onsubmit=" return addNameToForm()">
+                    <input type="hidden" name="name" id="nameField"/>
+                    <input type="email"  name= "email" id="email" placeholder="name@example.com"/>
+                    <input type="password" name= "pwd" id="password" placeholder="create password"/>
+                    <button type="submit">Continue</button> 
+                </form>
             </div>
             <h4 id="haveAcc" onclick="goToLogin()"> I already have an account </h4> 
         </div>
