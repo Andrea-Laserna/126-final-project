@@ -3,8 +3,6 @@ session_start();
 require_once "DBConnector.php";
 // send json response
 header('Content-Type: application/json');
-// echo json_encode(["debug" => "reached script"]);
-// die();
 
 // make sure user is logged in
 if (!isset($_SESSION['u_id'])) {
@@ -19,8 +17,8 @@ $input = json_decode(file_get_contents("php://input"), true); // read raw post d
 $session_type = $input['session_type'] ?? "unknown"; // ?? to check if session type is set, by default unknown
 
 // sql to insert a new timer record
-$sql = "INSERT INTO timer (start_time, session_type, completed, interrupted, u_id)
-        VALUES (NOW(), ?, 0, 0, ?)"; // ? as placeholders for session_type and u_id
+$sql = "INSERT INTO timer (start_time, session_type, u_id)
+        VALUES (NOW(), ?, ?)"; // ? as placeholders for session_type and u_id
 
 $stmt = $conn->prepare($sql); // passing sql template
 $stmt->bind_param("si", $session_type, $u_id); // first and second placeholders are string and int
@@ -29,7 +27,7 @@ if ($stmt->execute()) {
     // get id of newly inserted row
     echo json_encode(["time_id" => $stmt->insert_id]); // send back to js
 } else {
-    echo json_encode(["error" => "Failed to insert timer"]);
+    echo json_encode(["error" => "Failed to insert timer", "details" => $stmt->error]);
 }
 
 $stmt->close();

@@ -7,6 +7,7 @@ let timerInterval = null;
 let isPaused = false;
 let timeLeft = pomodoroTimeLeft; // track time globally
 let currentTimerId = null; // store session id oof current timer
+let timerBtns = null;
 
 document.getElementById("start-timer").addEventListener("click", popupTask);
 
@@ -103,7 +104,7 @@ function startTimer() {
     timeLeft = pomodoroTimeLeft;
 
     // create pause and stop buttons
-    const timerBtns = document.createElement('div');
+    timerBtns = document.createElement('div');
     timerBtns.id = 'timer-btns';
     timerBtns.innerHTML = `
         <div class="timer-btns-container">
@@ -143,7 +144,6 @@ function startTimer() {
             <div class="stop-popup-content">
                 <h1>Ayaw mo na?<br>Kala mo maraming nagawa eh.</h1>
                 <div class="stop-buttons">
-                    <button id="record">Record</button>
                     <button id="reset">Reset</button>
                 </div>
             </div>
@@ -151,16 +151,48 @@ function startTimer() {
         document.body.appendChild(stopPopup);
 
         stopPopup.querySelector('#reset').addEventListener('click', () => {
-            resetPomodoroTimer();
-            // timerBtns.parentNode.replaceChild(startBtn, timerBtns);
-            timerBtns.remove();
+            stopTimer()
             startBtn.style.display = 'inline-block';
+        });
+
+        document.querySelector('.exit-stop-popup').addEventListener('click', () => {
             stopPopup.remove();
         });
     });
 
     // start timer initially
     startCountdown(timerBtns);
+}
+
+function stopTimer() {
+    fetch("stop_timer.php", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            time_id: currentTimerId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            console.log("Timer stopped successfully.")
+            resetPomodoroTimer();
+            // timerBtns.parentNode.replaceChild(startBtn, timerBtns);
+            if (timerBtns) {
+                timerBtns.remove();
+                timerBtns = null;
+            }
+            const stopPopup = document.getElementById('stop-popup');
+            if (stopPopup) stopPopup.remove();
+        } else {
+            console.error("Failed to stop timer: ", data.error);
+        }
+    })
+    .catch(error => {
+        console.error("Fetch error: ", error);
+    });
 }
 
 function resetPomodoroTimer() {
@@ -190,6 +222,8 @@ function startCountdown(timerBtns) {
             clearInterval(timerInterval);
             timerInterval = null;
             alert("Time's up!");
+
+            stopTimer();
 
             // remove stopPopup if exists
             if (document.getElementById('stop-popup')) {
@@ -247,7 +281,31 @@ function breakCountdown(breakBtns) {
         startBtn.style.display = 'inline-block';
     });
 
-    breakStartBtns.querySelector('#break-start').addEventListener('click', startBreakTimer);
+    breakStartBtns.querySelector('#break-start').addEventListener('click', () => {
+        fetch ("start_timer.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                session_type: "Break"
+            })
+        })
+        .then(response=>response.json())
+        .then(data => {
+            console.log("Response from server: ", data)
+            if(data.time_id) {
+                currentTimerId = data.time_id;
+                console.log("Timer started with ID: ", currentTimerId);
+                startBreakTimer();
+            } else {
+                console.error("Timer start failed: ", data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error: ", error);
+        });
+    });
 }
 
 function startBreakTimer() {
