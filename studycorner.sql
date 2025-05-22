@@ -1,6 +1,6 @@
 -- Create User table
 CREATE TABLE User (
-    u_id INT AUTOINCREMENT PRIMARY KEY,
+    u_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100),
     pwd VARCHAR(100)
@@ -22,8 +22,6 @@ CREATE TABLE Timer (
     start_time DATETIME,
     end_time DATETIME,
     session_type VARCHAR(50),
-    completed BOOLEAN,
-    interrupted BOOLEAN,
     u_id INT,
     FOREIGN KEY (u_id) REFERENCES User(u_id)
 );
@@ -67,8 +65,8 @@ INSERT INTO Task VALUES
 
 -- Insert dummy timers
 INSERT INTO Timer VALUES
-(1001, '2025-05-16 08:00:00', '2025-05-16 08:25:00', 'Pomodoro', TRUE, FALSE, 1),
-(1002, '2025-05-16 09:00:00', '2025-05-16 09:30:00', 'Break', FALSE, TRUE, 2);
+(1001, '2025-05-16 08:00:00', '2025-05-16 08:25:00', 'Pomodoro', 1),
+(1002, '2025-05-16 09:00:00', '2025-05-16 09:30:00', 'Break', 2);
 
 -- Insert into creates relationship
 INSERT INTO creates VALUES
