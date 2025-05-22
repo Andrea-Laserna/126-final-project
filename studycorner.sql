@@ -1,6 +1,6 @@
 -- Create User table
 CREATE TABLE User (
-    u_id INT PRIMARY KEY,
+    u_id INT AUTOINCREMENT PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100),
     pwd VARCHAR(100)
@@ -18,7 +18,7 @@ CREATE TABLE Task (
 
 -- Create Timer table
 CREATE TABLE Timer (
-    time_id INT PRIMARY KEY,
+    time_id INT AUTO_INCREMENT PRIMARY KEY,
     start_time DATETIME,
     end_time DATETIME,
     session_type VARCHAR(50),

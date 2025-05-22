@@ -24,7 +24,7 @@ if(!$stmt){
 $stmt->bind_param("sss", $name, $email, $hashed_pwd);
 
 if ($stmt->execute()) {
-    header("Location: homepage.html");
+    header("Location: homepage.php");
     exit; 
 } else {
     echo "Error: " . $stmt->error; 

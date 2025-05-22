@@ -6,6 +6,7 @@ let breakTimeLeft = 0.6 * 60; // 1.5 minutes
 let timerInterval = null;
 let isPaused = false;
 let timeLeft = pomodoroTimeLeft; // track time globally
+let currentTimerId = null; // store session id oof current timer
 
 document.getElementById("start-timer").addEventListener("click", popupTask);
 
@@ -47,7 +48,31 @@ function popupTask() {
         });
     });
 
-    popup.querySelector("#start").addEventListener("click", startTimer);
+    popup.querySelector("#start").addEventListener("click", () => {
+        fetch("start_timer.php", {
+            method: "POST", // send post request to start_timer.php
+            headers: {
+                "Content-Type": "application/json" // data im sending is in json format
+            },
+            body: JSON.stringify({
+                session_type: "Pomodoro" // send this json body data to php
+            })
+        })
+        .then(response => response.json()) // convert server reply from json text back to usable js obj
+        .then(data => {
+            console.log("Response from server: ", data)
+            if(data.time_id) {
+                currentTimerId = data.time_id; // time_id auto-generated from start_timer.php
+                console.log("Timer started with ID: ", currentTimerId);
+                startTimer();
+            } else {
+                console.error("Timer start failed: ", data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error: ", error);
+        });
+    });
     updateDisplay(pomodoroTimeLeft);
 
     document.querySelector('.exit-task-popup').addEventListener('click', () => {

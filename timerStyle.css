@@ -231,7 +231,7 @@ header .logo .author {
     cursor: pointer;
 }
 
-.task-btns button:hover, #stop-popup .stop-popup-content .stop-buttons button:hover, #break-btns .break-buttons button:hover, #break-start-btns button:hover {
+.task-btns button:hover, #stop-popup .stop-popup-content .stop-buttons button:hover, #break-btns .break-buttons button:hover, #break-start-btns button:hover{
     background-color: #fda085;
     cursor: pointer;
 }
