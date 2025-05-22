@@ -1,0 +1,238 @@
+/* General styling */
+body {
+	font-family: Arial, sans-serif;
+	background: radial-gradient(circle at top left, #f6d365 0%, #fda085 30%, #a18cd1 60%, #fbc2eb 100%);
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	max-width: 1200px;
+	margin: 20px auto;
+	padding: 10px;
+}
+
+/* Title Styling */
+.container-calendar h1 {
+	color: palevioletred;
+	text-align: center;
+	margin-top: 0;
+	font-size: 2.2rem;
+}
+
+/* 3-column layout for calendar, form, and reminders */
+.container-calendar {
+	background: #ffffff;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	display: flex;
+	gap: 20px;
+	justify-content: space-between;
+	border-radius: 12px;
+	flex-wrap: wrap;
+}
+
+/* Left column - Add Event */
+#left {
+	flex: 1;
+	min-width: 250px;
+}
+
+#event-section {
+	background: #fdf6f9;
+	padding: 15px;
+	border: 1px solid #e5c7d9;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#event-section h3 {
+	color: palevioletred;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+#event-section input[type="date"],
+#event-section input[type="text"] {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+#event-section button {
+	background: palevioletred;
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	border-radius: 5px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+	width: 100%;
+}
+
+#event-section button:hover {
+	background: #d16b96;
+}
+
+/* Middle column - Calendar */
+#right {
+	flex: 2;
+	min-width: 350px;
+}
+
+#monthAndYear {
+	text-align: center;
+	color: #333;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.button-container-calendar {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.button-container-calendar button {
+	background: palevioletred;
+	color: white;
+	border: none;
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.button-container-calendar button:hover {
+	background: #d16b96;
+}
+
+.table-calendar {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-calendar td,
+.table-calendar th {
+	padding: 8px;
+	text-align: center;
+	border: 1px solid #e2e2e2;
+	vertical-align: top;
+}
+
+.date-picker:hover {
+	background-color: palevioletred;
+	color: white;
+	cursor: pointer;
+}
+
+.date-picker.selected {
+	background-color: #f2f2f2;
+	font-weight: bold;
+	outline: 1px dashed #00BCD4;
+}
+
+.footer-container-calendar {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.footer-container-calendar select {
+	padding: 6px 12px;
+	margin: 0 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+/* Event marker dot */
+.event-marker::after {
+	content: '';
+	display: block;
+	width: 6px;
+	height: 6px;
+	background-color: red;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* Right column - Reminders */
+#reminder-section {
+	flex: 1;
+	min-width: 250px;
+	background: #fdf6f9;
+	padding: 15px;
+	border: 1px solid #e5c7d9;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#reminder-section h3 {
+	color: palevioletred;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+#reminderList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#reminderList li {
+	margin-bottom: 8px;
+	font-size: 15px;
+}
+
+.delete-event {
+	background: crimson;
+	color: white;
+	border: none;
+	padding: 5px 8px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 13px;
+	margin-left: 10px;
+}
+
+/* Tooltip Styling */
+.event-tooltip {
+	position: absolute;
+	background-color: rgba(234, 232, 232, 0.95);
+	color: black;
+	padding: 10px;
+	border-radius: 4px;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: none;
+	z-index: 1;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.event-marker:hover .event-tooltip {
+	display: block;
+}
+
+/* Study Stats box below */
+.stats-container {
+	background-color: #ffffff;
+	margin: 30px auto;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 900px;
+	text-align: center;
+}
+
+.stats-container h2 {
+	color: palevioletred;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
