@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'DBConnector.php'; 
 
 $email = trim($_POST["email"] ?? '');
@@ -27,10 +28,16 @@ if ($pwd !== $user['pwd']) {
     exit;
 }
 
-echo "<script>
-    localStorage.setItem('reg_name', " . json_encode($user['name']) . ");
-    window.location.href = 'homepage.html';
-</script>";
+// store user id in the session
+$_SESSION['u_id'] = $user['u_id'];
+$_SESSION['name'] = $user['name'];
+
+// redirect to homepage
+// echo "<script>
+//     localStorage.setItem('reg_name', " . json_encode($user['name']) . ");
+//     window.location.href = 'homepage.html';
+// </script>";
+header("Location: homepage.php");
 
 $stmt->close();
 $conn->close();
