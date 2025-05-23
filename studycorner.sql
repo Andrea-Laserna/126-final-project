@@ -8,7 +8,7 @@ CREATE TABLE User (
 
 -- Create Task table
 CREATE TABLE Task (
-    t_id INT PRIMARY KEY,
+    t_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100),
     status VARCHAR(50),
     deadline DATE,
