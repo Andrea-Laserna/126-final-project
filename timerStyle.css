@@ -67,6 +67,13 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
 header .logo {
     display: inline-block;
     padding: 20px;
@@ -78,6 +85,34 @@ header h1 {
 
 header .logo .author {
     text-align: right;
+}
+
+header .navBar {
+  display: flex;
+  gap: 5px;
+}
+
+header .navBar .navigation {    
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: transparent;
+  transition: background 0.25s ease-in-out;
+  font-size: 15px;
+}
+
+header .navBar #timer.navigation{
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #785da180 !important;
+}
+
+header .navBar .navigation:hover {
+  background: #785da180 !important;
+  transform: none !important;
 }
 
 .timer-container {

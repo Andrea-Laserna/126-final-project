@@ -30,7 +30,7 @@ $name = $_SESSION['name'] ?? "user";
     <div class="card-section">
       <a class="navigation" href="timer.html"><div id="nav-timer">Timer</div></a>
       <a class="navigation" href="tasks_management.html"><div id="nav-tasks">Tasks</div></a>
-      <a class="navigation" href="statistics.html"><div id="nav-stats">Statistics</div></a>
+      <a class="navigation" href="calendar.html"><div id="nav-stats">Statistics</div></a>
     </div>
     
     <div class="tasks-container">
