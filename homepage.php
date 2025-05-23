@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "DBConnector.php";
 if (!isset($_SESSION['u_id'])) {
   header("Location: login.html");
   exit;
@@ -21,7 +22,7 @@ $name = $_SESSION['name'] ?? "user";
       <h2 id="authors">by: Webbers</h2>
     </div>
     <div class="header-right">
-      <h1 id="mssg">Hello, [username]!</h1>
+      <h1 id="mssg">Hello, <?php echo htmlspecialchars($name); ?>!</h1>
     </div>
   </header>
 
@@ -38,9 +39,24 @@ $name = $_SESSION['name'] ?? "user";
       <div class="task-summary">
         <h3>🎉 Don't be lazy and JUST DO IT!!</h3>
         <hr>
-        <div class="task-card due-soon">[Tasks Due Soon/OnGoing]</div>
-        <div class="task-card due-soon">[Tasks Due Soon/OnGoing]</div>
-        <div class="task-card due-soon">[Tasks Due Soon/OnGoing]</div>
+        <!-- for tasks in ongoing, echo php -->
+        <?php
+          $sql = "SELECT * FROM task WHERE u_id = ? AND status = 'On Going'";
+          $result = $conn->prepare($sql);
+          $result->bind_param("i", $_SESSION['u_id']);
+          if ($result->execute()) {
+            $result = $result->get_result();
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                echo "<div class='task-card ongoing'>" . htmlspecialchars($row['task_name']) . "</div>";
+              }
+            } else {
+              echo "<div class='task-card no-tasks'>No ongoing tasks</div>";
+            }
+          } else {
+            echo "<div class='task-card error'>Error fetching tasks</div>";
+          }
+        ?>
       </div>
       <div class="insert-timer-float">
         <h2>Insert timer here</h2>
