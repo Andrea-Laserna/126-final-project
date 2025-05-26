@@ -78,6 +78,51 @@ body {
 	background: #d16b96;
 }
 
+/*HEADER*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.navBar {
+  display: flex;
+  gap: 5px;
+}
+
+.navigation {    
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: transparent;
+  transition: background 0.25s ease-in-out;
+  font-size: 15px;
+}
+
+#stats.navigation{
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #785da180 !important;
+}
+
+.navigation:hover {
+  background: #785da180 !important;
+  transform: none !important;
+}
+
+#title {
+  font-size: 2.25rem;
+}
+
+#authors {
+  text-align: right;
+  font-size: 1.0rem;
+}
+
 /* Middle column - Calendar */
 #right {
 	flex: 2;
