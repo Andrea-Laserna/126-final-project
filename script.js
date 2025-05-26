@@ -9,7 +9,7 @@ let eventTitleInput =
 let eventDescriptionInput =
 	document.getElementById("eventDescription");
 let reminderList =
-	document.getElementById("reminderList");
+	document.getElementById("jsReminderList");
 
 // Counter to generate unique event IDs
 let eventIdCounter = 1;
@@ -35,7 +35,7 @@ function addEvent() {
 		eventDateInput.value = "";
 		eventTitleInput.value = "";
 		eventDescriptionInput.value = "";
-		displayReminders();
+		//displayReminders();
 	}
 }
 
@@ -50,40 +50,10 @@ function deleteEvent(eventId) {
 		// Remove the event from the events array
 		events.splice(eventIndex, 1);
 		showCalendar(currentMonth, currentYear);
-		displayReminders();
+		//displayReminders();
 	}
 }
 
-// Function to display reminders
-function displayReminders() {
-	reminderList.innerHTML = "";
-	for (let i = 0; i < events.length; i++) {
-		let event = events[i];
-		let eventDate = new Date(event.date);
-		if (eventDate.getMonth() ===
-			currentMonth &&
-			eventDate.getFullYear() ===
-			currentYear) {
-			let listItem = document.createElement("li");
-			listItem.innerHTML =
-				`<strong>${event.title}</strong> - 
-			${event.description} on 
-			${eventDate.toLocaleDateString()}`;
-
-			// Add a delete button for each reminder item
-			let deleteButton =
-				document.createElement("button");
-			deleteButton.className = "delete-event";
-			deleteButton.textContent = "Delete";
-			deleteButton.onclick = function () {
-				deleteEvent(event.id);
-			};
-
-			listItem.appendChild(deleteButton);
-			reminderList.appendChild(listItem);
-		}
-	}
-}
 
 // Function to generate a range of 
 // years for the year select input
@@ -216,8 +186,6 @@ function showCalendar(month, year) {
 		}
 		tbl.appendChild(row);
 	}
-
-	displayReminders();
 }
 
 // Function to create an event tooltip
