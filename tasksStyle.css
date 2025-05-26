@@ -103,7 +103,7 @@ header {
   border-radius: 8px;
   background: transparent;
   transition: background 0.25s ease-in-out;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #tasks.navigation{
@@ -120,12 +120,12 @@ header {
 }
 
 #title {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 
 #authors {
   text-align: right;
-  font-size: 1.0rem;
+  font-size: 1.25rem;
 }
 
 /*task lists*/
@@ -133,22 +133,22 @@ header {
   display: flex;
   position:fixed;
   flex: 1;
-  gap: 15px;
+  gap: 20px;
   margin-bottom: 10px;
   padding: 20px;
   left:5%;
-  top:23%;
-  width:80%;
-  min-height: 500px;
-  max-width: 1200px;
+  top:20%;
+  width:100%;
+  min-height: 700px;
+  max-width: 90%;
 }
 
 .status {
   background: rgba(252, 218, 240, 0.556);
   border-radius: 20px;
   padding: 20px;
-  width: 30%;
-  min-height: 45  0px;
+  width: 100%;
+  min-height: 45px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -158,11 +158,11 @@ header {
 .status .title {
   position: absolute; 
   left: 0;             
-  top: -45px;              
+  top: -60px;              
   background: rgba(103, 56, 83, 0.47);
   padding: 5px 20px;
-  border-radius: 20px;
-  font-size: 18px;
+  border-radius: 50px;
+  font-size: 28px;
   text-align: left;  
   color: white;
 }
@@ -170,7 +170,7 @@ header {
 .list-container {
   flex-grow: 1;
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 600px;
   margin-top: 10px;
   padding-right: 5px; 
 }
@@ -219,9 +219,14 @@ header {
 .options-btn {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 30px;
   cursor: pointer;
-  padding: 0 5px;
+  padding: 0 10px;
+}
+
+.options-btn:hover{
+  background-color: #8b5d7e3d;
+  border-radius: 10px;
 }
 
 .options-menu {
@@ -302,7 +307,7 @@ header {
   padding: 20px 30px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  width: 300px;
+  width: 400px;
   position: relative;
   text-align: center;
   color:black;
@@ -354,18 +359,3 @@ header {
   background-color: #7d3e6174;
 }
 
-
-/*.task-item {
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: white;
-  text-align: center;
-  font-size: 14px;
-  transition: transform 0.2s ease;
-}
-
-.task-item:hover {
-  transform: scale(1.03);
-  background: rgba(255, 255, 255, 0.2);
-}*/
