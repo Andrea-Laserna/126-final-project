@@ -17,14 +17,14 @@ $stmt->execute();
 $result = $stmt->get_result(); 
 
 if($result->num_rows === 0){
-    echo "invalid credentials";
+    echo "Invalid credentials";
     exit; 
 }
 
 $user = $result->fetch_assoc(); 
 
 if ($pwd !== $user['pwd']) {
-    echo "Invalid email or password.";
+    echo "Invalid email or password";
     exit;
 }
 
@@ -32,12 +32,9 @@ if ($pwd !== $user['pwd']) {
 $_SESSION['u_id'] = $user['u_id'];
 $_SESSION['name'] = $user['name'];
 
-// redirect to homepage
-// echo "<script>
-//     localStorage.setItem('reg_name', " . json_encode($user['name']) . ");
-//     window.location.href = 'homepage.html';
-// </script>";
-header("Location: homepage.php");
+
+echo "success"; 
+exit; 
 
 $stmt->close();
 $conn->close();

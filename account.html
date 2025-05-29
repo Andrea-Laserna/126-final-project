@@ -15,7 +15,7 @@
             <div class="login">
                 <h4 id="back" onclick="goToBack()">Back</h4>  
                 <h1 id="open">Login your Account</h1>
-                <form action="user.php" method="POST">
+                <form id= "loginForm">
                     <input type="email" name = "email" id="email" placeholder="name@example.com"/>
                     <input type="password" name = "pwd" id="password" placeholder="enter password"/>
                     <button type="submit">Continue</button>   
@@ -27,6 +27,37 @@
             function goToBack(){
                 window.location.href = "registration.html"; 
             }
+
+            const form = document.getElementById("loginForm");
+
+            form.addEventListener("submit", async function(event) {
+                event.preventDefault(); // Stop the form from submitting normally
+
+                const email = form.email.value.trim();
+                const password = form.pwd.value.trim();
+
+                const data = new FormData();
+                data.append("email", email);
+                data.append("pwd", password);
+
+                try {
+                    const response = await fetch("user.php", {
+                        method: "POST",
+                        body: data
+                    });
+
+                    const result = await response.text();
+
+                    if (result.trim() === "success") {
+                        window.location.href = "homepage.php";
+                    } else {
+                        alert(result);
+                    }
+                } catch (error) {
+                    console.error("Login error:", error);
+                    alert("Something went wrong. Please try again.");
+                }
+            });
         </script>
     </body>
 </html>
