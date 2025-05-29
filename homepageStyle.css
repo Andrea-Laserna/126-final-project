@@ -109,11 +109,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
-  max-width: 600px;
-  margin: 20px auto 0 auto;  /* top margin only */
+  width: 40vw;
+  max-width: 100%;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   text-align: center;
   word-wrap: break-word;
@@ -140,15 +138,15 @@ header {
   flex: 1;
   padding: 1.25rem;
   position: fixed;
-  left: 5vw;
-  top: 23vh;
+  left: 6rem;
+  top: 12rem;
   width: 60%;
 }
 
 .navigation {
   flex: 1;
   background: rgba(255, 255, 255, 0.2);
-  height: 65vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +160,7 @@ header {
   flex-direction: column; 
   align-items: center;
   justify-content: center;
-  width: 100; 
+  width: 100%; 
   height: 90%;
   text-align: center;
 }
@@ -204,7 +202,7 @@ header {
 /*tasks list*/
 .tasks-container{
   position: fixed;
-  top: 25%;
+  top: 13rem;
   right: 6%;
   width: 25%;
 }
@@ -252,7 +250,7 @@ header {
 
 .spotify {
   position: fixed;     /* Fixed position to stay in place */
-  bottom: -12%;           /* Align to bottom */
+  bottom: -15%;           /* Align to bottom */
   left: 69%;           /* Align to left */
   width: 30vw;
   height: 38vh;

@@ -195,6 +195,36 @@ function stopTimer() {
     });
 }
 
+function stopBreakTimer() {
+    return fetch("stop_timer.php", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            time_id:currentTimerId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log("Timer stopped successfully.")
+            resetBreakTimer();
+            if (timerBtns) {
+                timerBtns.remove();
+                timerBtns = null;
+            }
+            const stopPopup = document.getElementById('stop-popup');
+            if (stopPopup) stopPopup.remove();
+        } else {
+            console.error("Failed to stop timer: ", data.error);
+        }
+    })
+    .catch(error=>{
+        console.error("Fetch error: ", error);
+    });
+}
+
 function resetPomodoroTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
@@ -273,12 +303,13 @@ function breakCountdown(breakBtns) {
         clearInterval(timerInterval);
         timerInterval = null;
 
-        breakStartBtns.remove();
-        resetPomodoroTimer();
+        stopBreakTimer().then(()=>{
+            breakStartBtns.remove();
+            resetPomodoroTimer();
 
-        // Show start button again
-        breakStartBtns.remove();
-        startBtn.style.display = 'inline-block';
+            // Show start button again
+            startBtn.style.display = 'inline-block';
+        });
     });
 
     breakStartBtns.querySelector('#break-start').addEventListener('click', () => {
@@ -323,7 +354,7 @@ function startBreakTimer() {
             clearInterval(timerInterval);
             timerInterval = null;
             updateDisplay(0);
-
+            stopBreakTimer();
             // replace break start button with restart
             const restartBreak = document.createElement('button');
             restartBreak.id = 'restart-break';

@@ -147,9 +147,9 @@ header {
 .status {
   background: rgba(252, 218, 240, 0.556);
   border-radius: 20px;
-  padding: 20px;
-  width: 2000px;
-  height: 680px;
+  padding: 1.25rem;
+  width: 100%;
+  height: 70vh;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -163,7 +163,7 @@ header {
   background: rgba(103, 56, 83, 0.47);
   padding: 5px 20px;
   border-radius: 50px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   text-align: left;  
   color: white;
 }
@@ -361,3 +361,4 @@ header {
 .close:hover{
   background-color: #7d3e6174;
 }
+
