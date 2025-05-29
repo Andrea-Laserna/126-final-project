@@ -30,6 +30,7 @@ body {
 	justify-content: space-between;
 	border-radius: 12px;
 	flex-wrap: wrap;
+	margin-top: -15px;
 }
 
 /* Left column - Add Event */
@@ -94,11 +95,12 @@ header {
 .navigation {    
   text-decoration: none;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 8px;
   background: transparent;
   transition: background 0.25s ease-in-out;
   font-size: 15px;
+  font-weight: 900;
 }
 
 #stats.navigation{
@@ -114,13 +116,18 @@ header {
   transform: none !important;
 }
 
-#title {
+.header-left #title {
   font-size: 2.25rem;
+  color: white;
+  font-weight: 900;
+  margin-top: -10px;
 }
 
-#authors {
+.header-left #authors {
   text-align: right;
   font-size: 1.0rem;
+  color: white;
+  margin-top: -20px;
 }
 
 /* Middle column - Calendar */
