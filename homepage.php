@@ -21,6 +21,9 @@ $name = $_SESSION['name'] ?? "user";
       <h1 id="title">Study Corner</h1>
       <h2 id="authors">by: Webbers</h2>
     </div>
+    <div class="quote-container">
+      <p id="quote"></p>
+    </div>
     <div class="header-right">
       <h1 id="mssg">Hello, <?php echo htmlspecialchars($name); ?>!</h1>
     </div>
@@ -32,9 +35,6 @@ $name = $_SESSION['name'] ?? "user";
   </header>
 
   <div class="container">
-    <div class="quote-container">
-      <p id="quote"></p>
-    </div>
     <div class="card-section">
       <a class="navigation" href="timer.html">
         <div class="nav-content">
