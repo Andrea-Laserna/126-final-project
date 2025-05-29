@@ -20,6 +20,7 @@
   html {
     interpolate-size: allow-keywords;
     height: 100%;
+    font-size: 16px;
   }
 }
 
@@ -88,7 +89,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -104,7 +105,7 @@ header {
   border-radius: 8px;
   background: transparent;
   transition: background 0.25s ease-in-out;
-  font-size: 20px;
+  font-size: 1.5em;
 }
 
 #tasks.navigation{
@@ -121,12 +122,12 @@ header {
 }
 
 #title {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
 }
 
 #authors {
   text-align: right;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
 /*task lists*/
@@ -134,21 +135,21 @@ header {
   display: flex;
   position:fixed;
   flex: 1;
-  gap: 20px;
+  gap: 1.25rem;
   margin-bottom: 10px;
-  padding: 20px;
-  left:85px;
-  top:180px;
-  width:2000px;
-  max-width: 90%;
+  padding: 1.25rem;
+  left:5vw;
+  top:21vh;
+  width:90vw;
+  max-width: 100%;
 }
 
 .status {
   background: rgba(252, 218, 240, 0.556);
   border-radius: 20px;
-  padding: 20px;
-  width: 2000px;
-  height: 680px;
+  padding: 1.25rem;
+  width: 100%;
+  height: 70vh;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -162,7 +163,7 @@ header {
   background: rgba(103, 56, 83, 0.47);
   padding: 5px 20px;
   border-radius: 50px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   text-align: left;  
   color: white;
 }
@@ -188,12 +189,12 @@ header {
   display: flex;
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.6);
-  padding: 15px;
+  padding: 0.9375rem;
   border-radius: 12px;
   text-align: left;
   transition: background 0.3s;
   color:#333;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 
 .task-card.add-task {
@@ -244,9 +245,9 @@ header {
 }
 
 .options-menu li {
-  padding: 8px 15px;
+  padding:  0.5rem 0.9375rem;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .options-menu li:hover {
@@ -275,9 +276,9 @@ header {
 }
 
 .status-menu li {
-  padding: 8px 15px;
+  padding: 0.5rem 0.9375rem;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .status-menu li:hover {
@@ -294,7 +295,8 @@ header {
   display: none;
   position: fixed;
   z-index: 100;
-  left: 0; top: 0;
+  left: 0; 
+  top: 0;
   width: 100%; height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   justify-content: center;
@@ -304,10 +306,11 @@ header {
 /* Modal Box */
 .pop-up {
   background: #fff;
-  padding: 20px 30px;
+  padding: 1.25rem 1.875rem;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  width: 400px;
+  width: 90%;
+  max-width: 400px;
   position: relative;
   text-align: center;
   color:black;
@@ -331,7 +334,7 @@ header {
 }
 
 .pop-up button {
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   background-color: #8c52ff;
   color: white;
   border: none;
@@ -358,3 +361,4 @@ header {
 .close:hover{
   background-color: #7d3e6174;
 }
+
