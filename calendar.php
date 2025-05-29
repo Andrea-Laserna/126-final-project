@@ -8,7 +8,7 @@ if (isset($_SESSION['u_id'])) {
     $sql = "
         SELECT 
             session_type,
-            SUM(TIMESTAMPDIFF(MINUTE, start_time, end_time)) AS total_minutes
+            ROUND(SUM(TIMESTAMPDIFF(SECOND, start_time, end_time)) / 60, 2) AS total_minutes
         FROM timer 
         WHERE u_id = ?
           AND start_time IS NOT NULL
@@ -159,27 +159,18 @@ if (isset($_SESSION['u_id'])) {
 				<h2>Study Stats</h2>
 				<?php
 				if(isset($_SESSION['u_id'])){
-					$pomodoro_minutes = $_SESSION['Pomodoro'] ?? 0;
-					$break_minutes = $_SESSION['Break'] ?? 0; 
+					$pomodoro_decimal = $_SESSION['Pomodoro'] ?? 0;
+					$break_decimal = $_SESSION['Break'] ?? 0; 
 
 					// Optionally convert to hours/minutes
-					$pomodoro_hours = floor($pomodoro_minutes / 60);
-					$pomodoro_remainder = $pomodoro_minutes % 60;
+					$pomodoro_minutes = floor($pomodoro_decimal);
+					$pomodoro_seconds = round(($pomodoro_decimal- $pomodoro_minutes) * 60);
 
-					$break_hours = floor($break_minutes / 60);
-					$break_remainder = $break_minutes % 60;
+					$break_minutes = floor($break_decimal);
+					$break_seconds = round(($break_decimal- $break_minutes) * 60);
 
-					echo "<p><strong>Pomodoro Time:</strong> {$pomodoro_minutes} minutes";
-					if ($pomodoro_minutes >= 60) {
-						echo " ({$pomodoro_hours}h {$pomodoro_remainder}m)";
-					}
-					echo "</p>";
-
-					echo "<p><strong>Break Time:</strong> {$break_minutes} minutes";
-					if ($break_minutes >= 60) {
-						echo " ({$break_hours}h {$break_remainder}m)";
-					}
-					echo "</p>";
+					echo "<p><strong>Pomodoro Time:</strong> {$pomodoro_minutes} minutes {$pomodoro_seconds} seconds</p>";
+					echo "<p><strong>Break Time:</strong> {$break_minutes} minutes {$break_seconds} seconds</p>";
 				} else {
 					echo "<p>Please log in to see your study statistics.</p>";
 				}

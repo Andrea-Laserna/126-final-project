@@ -13,8 +13,10 @@ if (empty($name) || empty($email) || empty($pwd)) {
 //$hashed_pwd = password_hash($pwd, PASSWORD_DEFAULT);
 $hashed_pwd = $pwd;
 
-$sql = "INSERT INTO `user` (`name`, `email`, `pwd`) VALUES (?, ?, ?)";
-$stmt = $conn->prepare($sql);
+if((filter_var($email, FILTER_VALIDATE_EMAIL))){
+    $sql = "INSERT INTO `user` (`name`, `email`, `pwd`) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+}
 
 if(!$stmt){
     echo "Prepare failed: (" . $conn->errno .") ". $conn->error;
