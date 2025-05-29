@@ -10,7 +10,7 @@ async function fetchData(){
         const quote = data.quote;
 
         const container = document.getElementById("quote");
-        container.textContent = `"${quote} - Kanye West"`;
+        container.textContent = `"${quote}" - Kanye West`;
 
     }catch(error){
         console.error("Error fetching quote:",error);
