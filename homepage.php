@@ -24,29 +24,41 @@ $name = $_SESSION['name'] ?? "user";
     <div class="header-right">
       <h1 id="mssg">Hello, <?php echo htmlspecialchars($name); ?>!</h1>
     </div>
+    <div class="logout">
+      <a href="logout.php">
+        <img src="images/log-out-04-svgrepo-com.svg">
+      </a>
+    </div>
   </header>
 
   <div class="container">
-    <p id="quote"></p>
+    <div class="quote-container">
+      <p id="quote"></p>
+    </div>
     <div class="card-section">
       <a class="navigation" href="timer.html">
-        <span class="text">Timer</span>
-        <img src="timer.png" class="icon" alt="Timer Icon">
+        <div class="nav-content">
+          <span class="text">Timer</span>
+          <img src="timer.png" class="icon" alt="Timer Icon">
+        </div>
       </a>
       <a class="navigation" href="tasks_management.html">
-        <span class="text">Tasks</span>
-        <img src="task.png" class="icon" alt="Timer Icon">
+        <div class="nav-content">
+          <span class="text">Tasks</span>
+          <img src="task.png" class="icon" alt="Timer Icon">
+        </div>
       </a>
       <a class="navigation" href="calendar.php">
-        <span class="text">Statistics</span>
-        <img src="statistics.png" class="icon" alt="Timer Icon">
+        <div class="nav-content">
+          <span class="text">Statistics</span>
+          <img src="statistics.png" class="icon" alt="Timer Icon">
+        </div>
       </a>
     </div>
     
     <div class="tasks-container">
-      <h2 class="summary-title">Task Summary</h2>
       <div class="task-summary">
-        <h3>🎉 Don't be lazy and JUST DO IT!!</h3>
+        <h3>Continue where you left off...</h3>
         <hr>
         <!-- for tasks in ongoing, echo php -->
         <?php
@@ -69,6 +81,16 @@ $name = $_SESSION['name'] ?? "user";
       </div>
     </div>
   </div>
+  <div class="spotify">
+    <iframe
+      src="https://open.spotify.com/embed/playlist/1iCIhy3fqqSBrTUcIxI804?utm_source=generator"
+      frameborder="0" 
+      allowfullscreen 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+      loading="lazy">
+  </iframe>
+</div>
+
   <script src="fetch.js"></script>
 </body>
 </html>
