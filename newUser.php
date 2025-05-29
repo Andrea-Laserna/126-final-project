@@ -1,4 +1,5 @@
 <?php
+session_start(); // <-- make sure session is started
 include 'DBConnector.php';  
 
 $name = trim($_POST["name"] ?? '');
@@ -26,6 +27,13 @@ if(!$stmt){
 $stmt->bind_param("sss", $name, $email, $hashed_pwd);
 
 if ($stmt->execute()) {
+    // get the new user's ID
+    $new_user_id = $stmt->insert_id;
+
+    // set session variables
+    $_SESSION['u_id'] = $new_user_id;
+    $_SESSION['name'] = $name;
+
     header("Location: homepage.php");
     exit; 
 } else {
@@ -34,5 +42,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-
 ?>
