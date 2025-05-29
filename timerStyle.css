@@ -254,6 +254,15 @@ header .navBar .navigation:hover {
     flex-direction: column;
 }
 
+.task-popup-content p {
+  top: 2rem;
+  width: 70%;
+  text-align: center;
+}
+
+#new-task-form .form-container img {
+  margin-right: 1.5rem;
+}
 /* buttons */
 .task-btns button, .timer-btns-container button, #stop-popup .stop-popup-content .stop-buttons button, #break-btns .break-buttons button, #break-start-btns button {
     background-color: #8c52ff;
@@ -314,6 +323,14 @@ header .navBar .navigation:hover {
     background-color: #fda085;
 }
 
+#new-task-form {
+  background-color: rgba(51, 51, 51, 0.3);
+  border-radius: 20px;
+}
+
+#new-task-form .form-container {
+  padding: 20px;
+}
 /* stop popup */
 #stop-popup {
     position: fixed;

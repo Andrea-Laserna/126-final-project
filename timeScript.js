@@ -12,42 +12,130 @@ let timerBtns = null;
 document.getElementById("start-timer").addEventListener("click", popupTask);
 
 function popupTask() {
-    if (document.getElementById('task-popup')) return;
+    let existingPopup = document.getElementById('task-popup');
 
+    if (existingPopup) {
+        // if popup already exists, ensure it's visible and hide startBtn
+        existingPopup.style.display = 'block';
+        startBtn.style.display = 'none';
+        return;
+    }
+    
     const popup = document.createElement('div');
     popup.id = 'task-popup';
     popup.innerHTML = `
         <img src="images/close-square-svgrepo-com.svg" class="exit-task-popup">
         <div class="task-popup-container">
             <div class="task-popup-content">
-                <p>Which task would you like to work on now?</p>
-                <ul class="task-list">
-                    <li class="task" id="t1">Save Pakistan</li>
-                    <li class="task" id="t2">Destroy India</li>
-                    <li class="task" id="t3">Grape</li>
-                    <li class="task" id="t4">Grape</li>
-                    <li class="task" id="t5">Grape</li>
-                    <li class="task" id="t6">Grape</li>
-                    <li class="task" id="t7">Grape</li>
-                </ul>
+                <p id="task-question">Which task would you like to work on now?</p>
+                <ul class="task-list"></ul>
                 <div class="task-btns">
                     <button id="add-task">Add Task</button>
-                    <button id="start">Start</button>
+                    <button id="start">Start Timer</button>
                 </div>
             </div>
         </div>
     `;
 
     document.body.appendChild(popup);
+    fetch("get_tasks.php")
+        .then(response => response.json())
+        .then(tasks => {
+            const taskList = popup.querySelector('.task-list');
+            taskList.innerHTML = ''; // Clear just in case
 
-    const currentTaskDisplay = document.querySelector('.current-task');
-    const listContent = popup.querySelectorAll('.task');
+            const ongoingTasks = tasks.filter(task=> task.status === "ongoing");
+            if (ongoingTasks.length === 0) {
+                taskList.innerHTML = "<li>No ongoing tasks found.</li>";
+                return;
+            }
+            ongoingTasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = 'task';
+                let dueText = "(≖_≖ )";
+                if (task.deadline) {
+                    const dueDate = new Date(task.deadline);
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    dueText = dueDate.toLocaleDateString('en-US', options);
+                }
 
-    listContent.forEach(task => {
-        task.addEventListener('click', () => {
-            currentTaskDisplay.textContent = task.textContent;
+                li.innerHTML = `
+                    <strong>${task.title}</strong><br>
+                    <small>Due: ${dueText}</small>
+                `;
+                li.dataset.id = task.t_id; // optional: to track selected task
+                taskList.appendChild(li);
+            });
+
+            const currentTaskDisplay = document.querySelector('.current-task');
+
+            taskList.querySelectorAll('.task').forEach(task => {
+                task.addEventListener('click', () => {
+                    currentTaskDisplay.textContent = task.textContent;
+                });
+            });
+        })
+        .catch(error => {
+            console.error("Error loading tasks in popup:", error);
+        });
+
+    popup.querySelector("#add-task").addEventListener("click", () => {
+        const popupContent = popup.querySelector(".task-popup-content");
+
+        if (popupContent.querySelector('#new-task-form')) return;
+        
+        const form = document.createElement("form");
+        document.getElementById('task-question').style.display = 'none';
+        form.id = "new-task-form";
+        form.innerHTML = `
+            <div class="form-container">
+                <input type="text" name="title" placeholder="Task title" required />
+                <input type="date" name="deadline" />
+                <button type="submit">Save</button>
+                <img src="images/close-square-svgrepo-com.svg" class="exit-task-popup">
+            </div>
+        `;
+
+        popupContent.appendChild(form);
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const task = {
+                title: formData.get("title"),
+                deadline: formData.get("deadline"),
+                status: "ongoing" // send required status field
+            };
+
+            fetch("add_task.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(task)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert("Task added!");
+                    form.remove(); // or popup.remove();
+                    popup.remove(); // Close and re-open to refresh task list
+                    popupTask();
+                } else {
+                    alert("Failed to add task: " + result.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error adding task:", error);
+            });
+        });
+        form.querySelector('.exit-task-popup').addEventListener('click', () => {
+            document.getElementById('task-question').style.display = 'inline-block';
+            form.remove();
         });
     });
+
 
     popup.querySelector("#start").addEventListener("click", () => {
         fetch("start_timer.php", {
@@ -151,7 +239,8 @@ function startTimer() {
         document.body.appendChild(stopPopup);
 
         stopPopup.querySelector('#reset').addEventListener('click', () => {
-            stopTimer()
+            alert("Your progress will be recorded!");
+            stopTimer();
             startBtn.style.display = 'inline-block';
         });
 
