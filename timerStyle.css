@@ -115,6 +115,22 @@ header .navBar .navigation:hover {
   transform: none !important;
 }
 
+
+.quote-container {
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+#quote {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
 .timer-container {
     display: flex;
     justify-content: center;
