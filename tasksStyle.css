@@ -137,34 +137,19 @@ header {
   flex: 1;
   gap: 1.25rem;
   margin-bottom: 10px;
-<<<<<<< HEAD
   padding: 1.25rem;
   left:5vw;
   top:21vh;
   width:90vw;
   max-width: 100%;
-=======
-  padding: 20px;
-  left:85px;
-  top:180px;
-  width:2000px;
-  min-height: 700px;
-  max-width: 90%;
->>>>>>> c51f2976496f7f77078a656bfc5e99f690f8ce22
 }
 
 .status {
   background: rgba(252, 218, 240, 0.556);
   border-radius: 20px;
-<<<<<<< HEAD
-  padding: 1.25rem;
-  width: 100%;
-  height: 70vh;
-=======
   padding: 20px;
   width: 2000px;
   height: 680px;
->>>>>>> c51f2976496f7f77078a656bfc5e99f690f8ce22
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -178,11 +163,7 @@ header {
   background: rgba(103, 56, 83, 0.47);
   padding: 5px 20px;
   border-radius: 50px;
-<<<<<<< HEAD
-  font-size: 1.5rem;
-=======
   font-size: 1.5em;
->>>>>>> c51f2976496f7f77078a656bfc5e99f690f8ce22
   text-align: left;  
   color: white;
 }
