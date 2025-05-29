@@ -8,18 +8,26 @@ let isPaused = false;
 let timeLeft = pomodoroTimeLeft; // track time globally
 let currentTimerId = null; // store session id oof current timer
 let timerBtns = null;
+let taskConfirmed = false;
 
-document.getElementById("start-timer").addEventListener("click", popupTask);
+startBtn.addEventListener("click", () => {
+    popupTask();
+    popup.style.display = 'block';
+    startBtn.style.display = 'none';
+});
 
 function popupTask() {
-    let existingPopup = document.getElementById('task-popup');
+    const existingPopup = document.getElementById('task-popup');
 
-    if (existingPopup) {
-        // if popup already exists, ensure it's visible and hide startBtn
+    if (existingPopup && existingPopup.style.display !== 'none') {
+        startBtn.style.display = 'none';
+        return;
+    } else if (existingPopup && existingPopup.style.display === 'none') {
         existingPopup.style.display = 'block';
         startBtn.style.display = 'none';
         return;
     }
+
     
     const popup = document.createElement('div');
     popup.id = 'task-popup';
@@ -38,6 +46,8 @@ function popupTask() {
     `;
 
     document.body.appendChild(popup);
+    startBtn.style.display = 'none';
+
     fetch("get_tasks.php")
         .then(response => response.json())
         .then(tasks => {
@@ -138,6 +148,7 @@ function popupTask() {
 
 
     popup.querySelector("#start").addEventListener("click", () => {
+        taskConfirmed = true;
         fetch("start_timer.php", {
             method: "POST", // send post request to start_timer.php
             headers: {
@@ -166,6 +177,9 @@ function popupTask() {
 
     document.querySelector('.exit-task-popup').addEventListener('click', () => {
         popup.remove();
+        if (timerInterval == null) {
+            startBtn.style.display = 'inline-block';
+        }
     });
 }
 
@@ -251,6 +265,7 @@ function startTimer() {
 
     // start timer initially
     startCountdown(timerBtns);
+    taskConfirmed = false;
 }
 
 function stopTimer() {
@@ -282,6 +297,7 @@ function stopTimer() {
     .catch(error => {
         console.error("Fetch error: ", error);
     });
+    taskConfirmed = false;
 }
 
 function stopBreakTimer() {
@@ -437,6 +453,10 @@ function startBreakTimer() {
 
     timerInterval = setInterval(() => {
         if (timeLeft > 0) {
+            const taskPopup = document.getElementById('task-popup');
+            if (taskPopup) {
+                taskPopup.style.display = 'none';
+            }
             timeLeft--;
             updateDisplay(timeLeft);
         } else {
@@ -444,7 +464,7 @@ function startBreakTimer() {
             timerInterval = null;
             updateDisplay(0);
             stopBreakTimer();
-            // replace break start button with restart
+            // replace break start button with restartk
             const restartBreak = document.createElement('button');
             restartBreak.id = 'restart-break';
             restartBreak.textContent = 'Restart Break';

@@ -25,16 +25,20 @@
 
 body {
     color: white;
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat;
-    background: radial-gradient(circle at top left, #fda085 0%, #d18cb8 30%, #a18cd1 60%, #8bafd0 100%);
+    height: 100vh;
+    width: 100vw;
     font-family: "Sublima", sans-serif;
-    /* 4. Add accessible line-height */
     line-height: 1.5;
-    /* 5. Improve text rendering */
     -webkit-font-smoothing: antialiased;
+
+    background-image: radial-gradient(circle at top left, #fda085 0%, #d18cb8 30%, #a18cd1 60%, #8bafd0 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
 }
+
+
 
 /* 6. Improve media defaults */
 img, picture, video, canvas, svg {
@@ -69,9 +73,10 @@ h1, h2, h3, h4, h5, h6 {
 
 header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
+  position: relative;
 }
 
 header .logo {
@@ -90,6 +95,11 @@ header .logo .author {
 header .navBar {
   display: flex;
   gap: 5px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 header .navBar .navigation {    
@@ -136,7 +146,7 @@ header .navBar .navigation:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 80%;
+    height: 70%;
 }
 
 .timer-container p {
@@ -229,7 +239,7 @@ header .navBar .navigation:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
-    transform: translateY(-105%);
+    transform: translateY(-95%);
     right: 1.5rem;
     z-index: 1000;
 }
