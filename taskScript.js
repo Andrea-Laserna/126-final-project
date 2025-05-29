@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveBtn.click();     // Trigger the save button click handler to handle adding/updating task
   });
 
-
   addButtons.forEach(button => {
     button.addEventListener("click", () => {
       currentColumn = button.closest(".status");
