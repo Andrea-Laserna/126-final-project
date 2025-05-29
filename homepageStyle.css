@@ -89,12 +89,12 @@ header {
 }
 
 #title {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 
 #authors {
   text-align: right;
-  font-size: 1.0rem;
+  font-size: 1.25rem;
 }
 
 #mssg {
@@ -128,14 +128,15 @@ p#quote {
   padding: 20px;
   position:fixed;
   left:5%;
-  top:25%;
+  top:22%;
   width:60%;
 }
+
 
 .navigation{
   flex: 1;
   background: rgba(255, 255, 255, 0.2);
-  height: 430px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,6 +147,29 @@ p#quote {
 
 .navigation:hover {
   transform: scale(1.05);
+}
+.nav-button .text {
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+.navigation .icon {
+  display: none;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  transition: opacity 0.3s ease-in, transform 0.3s ease;
+}
+
+.navigation:hover .text {
+  display: none;
+}
+
+.navigation:hover .icon {
+  display: inline-block;
+  width: 50%;
+  height:35%;
+  transform: scale(1);
 }
 
 /*tasks list*/
@@ -189,6 +213,7 @@ p#quote {
   text-align: center;
   transition: transform 0.2s;
   gap:20px;
+  border-left: 4px solid #ff6b6b;
 }
 
 .task-card.due-soon {

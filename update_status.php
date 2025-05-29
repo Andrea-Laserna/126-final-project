@@ -31,7 +31,7 @@ if (!$data || !isset($data['t_id']) || !isset($data['status'])) {
 $t_id = intval($data['t_id']);
 $status = $data['status'];
 
-$validStatuses = ['todo', 'in-progress', 'done']; // example statuses
+$validStatuses = ['pending', 'ongoing', 'done']; // example statuses
 if (!in_array($status, $validStatuses)) {
     http_response_code(400);
     echo json_encode(["success" => false, "message" => "Invalid status value"]);

@@ -29,9 +29,18 @@ $name = $_SESSION['name'] ?? "user";
   <div class="container">
     <p id="quote"></p>
     <div class="card-section">
-      <a class="navigation" href="timer.html"><div id="nav-timer">Timer</div></a>
-      <a class="navigation" href="tasks_management.html"><div id="nav-tasks">Tasks</div></a>
-      <a class="navigation" href="calendar.php"><div id="nav-stats">Statistics</div></a>
+      <a class="navigation" href="timer.html">
+        <span class="text">Timer</span>
+        <img src="timer.png" class="icon" alt="Timer Icon">
+      </a>
+      <a class="navigation" href="tasks_management.html">
+        <span class="text">Tasks</span>
+        <img src="task.png" class="icon" alt="Timer Icon">
+      </a>
+      <a class="navigation" href="calendar.php">
+        <span class="text">Statistics</span>
+        <img src="statistics.png" class="icon" alt="Timer Icon">
+      </a>
     </div>
     
     <div class="tasks-container">
@@ -41,14 +50,14 @@ $name = $_SESSION['name'] ?? "user";
         <hr>
         <!-- for tasks in ongoing, echo php -->
         <?php
-          $sql = "SELECT * FROM task WHERE u_id = ? AND status = 'On Going'";
+          $sql = "SELECT * FROM task WHERE u_id = ? AND status = 'ongoing'";
           $result = $conn->prepare($sql);
           $result->bind_param("i", $_SESSION['u_id']);
           if ($result->execute()) {
             $result = $result->get_result();
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
-                echo "<div class='task-card ongoing'>" . htmlspecialchars($row['task_name']) . "</div>";
+                echo "<div class='task-card ongoing'>" . htmlspecialchars($row['title']) . "</div>";
               }
             } else {
               echo "<div class='task-card no-tasks'>No ongoing tasks</div>";
@@ -57,9 +66,6 @@ $name = $_SESSION['name'] ?? "user";
             echo "<div class='task-card error'>Error fetching tasks</div>";
           }
         ?>
-      </div>
-      <div class="insert-timer-float">
-        <h2>Insert timer here</h2>
       </div>
     </div>
   </div>
